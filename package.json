@@ -33,6 +33,7 @@
         "grunt-contrib-watch": "^0.6.1",
         "jit-grunt": "^0.9.1",
         "less": "^2.5.3",
-        "time-grunt": "^1.2.1"
+        "time-grunt": "^1.2.1",
+        "yuidoc-lucid-theme": "^0.1.1"
     }
 }

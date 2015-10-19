@@ -1,0 +1,17 @@
+{
+    "name": "c2fo-ui-components",
+    "description": "C2FO core ui components",
+    "version": "0.0.1",
+    "options": {
+        "linkNatives": true,
+        "attributesEmit": false,
+        "outdir": "./docs",
+        "ignorePaths": [
+            "./node_modules"
+        ],
+        "themedir": "node_modules/yuidoc-lucid-theme",
+        "helpers": [
+            "node_modules/yuidoc-lucid-theme/helpers/helpers.js"
+        ]
+    }
+}
