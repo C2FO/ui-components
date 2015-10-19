@@ -17,3 +17,17 @@ git clone git@github.com:C2FO/ui-components.git
 cd ui-components
 git submodule update --init --recursive
 ```
+
+### Generating Documentation
+yuidoc - http://yui.github.io/yuidoc/
+
+```
+# Confirm your changes with the yuidoc server
+yuidoc . --server 
+
+# Build main repo documentation
+yuidoc .
+
+# Build public documentation with github pages (c2fo.github.io/ui-components/docs)
+yuidoc . -o gh-pages/docs/
+
