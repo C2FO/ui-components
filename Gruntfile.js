@@ -16,7 +16,10 @@ module.exports = function (grunt) {
             // configurable paths
             dist: 'dist',
             components: 'src/components',
-            core: "src/core"
+            core: 'src/core',
+            docs: 'docs',
+            ghPages: 'gh-pages'
+
         },
         watch: {
             less: {
@@ -94,15 +97,44 @@ module.exports = function (grunt) {
                     ext: '.min.css'
                 }]
             }
+        },
+        exec: {
+            docs: 'yuidoc .',
+            gh_pages: {
+                command: 'yuidoc -o <%=paths.ghPages %>/docs/ .'
+            },
+            publish_gh_pages: {
+                cwd: '<%=paths.ghPages %>/',
+                command: function () {
+                    return [
+                        'git add .',
+                        'git commit -m \'Creating github pages documentation snapshot\'',
+                        'git push origin gh-pages'
+                    ].join('; ');
+                }
+            }
         }
-    });
+    })
+    ;
 
-    //grunt.registerTask('default');
+    grunt.registerTask('docs', [
+        'exec:docs'
+    ]);
+
+    grunt.registerTask('gh_pages', 'exec:gh_pages');
+
+    grunt.registerTask('publish_gh_pages', [
+        'exec:gh_pages',
+        'exec:publish_gh_pages'
+    ]);
+
+//grunt.registerTask('default');
     grunt.registerTask('build', [
         'clean:dist',
         'copy:dist',
         'less:dist',
         'uglify:dist',
-        'cssmin:dist'
+        'cssmin:dist',
+        'docs'
     ]);
 };

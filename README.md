@@ -22,12 +22,18 @@ git submodule update --init --recursive
 yuidoc - http://yui.github.io/yuidoc/
 
 ```bash
+# Install yuidoc globally. This is preferred by the module.
+npm install -g yuidocjs
+```
+
+```bash
 # Confirm your changes with the yuidoc server
 yuidoc . --server 
 
 # Build main repo documentation
-yuidoc .
+grunt docs
 
-# Build public documentation with github pages (c2fo.github.io/ui-components/docs)
-yuidoc . -o gh-pages/docs/
+# Publish documentation to github pages (c2fo.github.io/ui-components/docs)
+grunt publish_gh_pages
+```
 
