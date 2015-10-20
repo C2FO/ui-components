@@ -15,7 +15,7 @@ git clone --recursive git@github.com:C2FO/ui-components.git
 
 or
 
-```bash
+```bashcd gh    
 git clone git@github.com:C2FO/ui-components.git
 cd ui-components
 git submodule update --init --recursive
