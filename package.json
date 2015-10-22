@@ -1,12 +1,10 @@
 {
   "name": "c2fo-ui-components",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "C2FO core ui components",
   "main": "index.js",
   "scripts": {
-    "test": "grunt build",
-    "prepublish": "grunt build",
-    "postinstall": "grunt build"
+    "test": "grunt build"
   },
   "repository": {
     "type": "git",

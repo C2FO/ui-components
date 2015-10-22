@@ -2,7 +2,7 @@
     "project": {
         "name": "c2fo-ui-components",
         "description": "C2FO core ui components",
-        "version": "1.0.0"
+        "version": "1.0.1"
     },
     "files": {
         "dist/c2fo-ui-components.bundle.js": {
