@@ -59,6 +59,10 @@ grunt publish_gh_pages
 
 ### Change Log
 
+* 1.1.1
+    * Match c2fo style guide for module components
+    * Add custom filter key functionality for checkboxFilterGroup
+    * Add unit controller tests
 * 1.0.0
     * Bundle entire core library with webpack. This should be the preferred
     * Convert all modules to use commonjs

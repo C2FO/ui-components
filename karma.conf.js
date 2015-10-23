@@ -17,7 +17,7 @@ module.exports = function (config) {
         files: [
             './node_modules/angular/angular.min.js',
             './node_modules/angular-mocks/angular-mocks.js',
-            './dist/c2fo-ui-components.bundle.js',
+            './dist/c2fo-ui-components.js',
             './src/**/*.spec.js'
         ],
 
@@ -47,7 +47,7 @@ module.exports = function (config) {
 
         // level of logging
         // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-        logLevel: config.LOG_DEBUG,
+        logLevel: config.LOG_INFO,
 
 
         // enable / disable watching file and executing tests whenever any file changes

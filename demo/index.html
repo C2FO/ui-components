@@ -4,55 +4,66 @@
     <meta charset="UTF-8">
     <title>C2FO UI Components Demo</title>
     <script src="../node_modules/angular/angular.min.js"></script>
-    <script src="../dist/c2fo-ui-components.min.js"></script>
+    <script src="../dist/c2fo-ui-components.js"></script>
     <link href="../dist/c2fo-ui-components.min.css"/>
+    <style>
+        pre {
+            background: #eee;
+            padding: 10px;
+        }
+    </style>
 </head>
 <body class="container">
-<div ng-app="app" ng-controller="appCtrl">
-    <h1>Updated {{runNum}} time(s)</h1>
+<div ng-app="app" ng-controller="AppController as appCtrl">
+    <h1>Updated {{appCtrl.runNum}} time(s)</h1>
     <c2fo-checkbox-filter-group
             label="Boolean Filter Group"
-            fields="filterFields"
-            filter="filter"
+            fields="appCtrl.filterFields"
+            filter="appCtrl.filter"
             filter-key="booleanKey"
-            on-update="onFilterChange">
+            on-update="appCtrl.onFilterChange">
     </c2fo-checkbox-filter-group>
     <c2fo-checkbox-filter-group
             label="Status (multi check)"
-            fields="multicheckFilterFields"
-            filter="filter"
+            fields="appCtrl.multicheckFilterFields"
+            filter="appCtrl.filter"
             filter-key="multicheck"
             multicheck="true"
-            on-update="onFilterChange">
+            on-update="appCtrl.onFilterChange">
     </c2fo-checkbox-filter-group>
 
-    <pre>{{filter | json}}</pre>
+    <pre>{{appCtrl.filter | json}}</pre>
 </div>
 <script>
-    angular.module('app', ['c2fo.ui'])
-            .controller('appCtrl', ['$scope', function ($scope) {
-                $scope.runNum = 0;
-                $scope.filter = {
-                    booleanKey: [true],
-                    multicheck: ['IS_NEW', 'IS_OPEN']
-                };
-                $scope.filterFields = [
-                    {label: 'Yes', value: true, isChecked: true},
-                    {label: 'No', value: false}
-                ];
+    angular.module('app', ['c2fo.ui']).controller('AppController', AppController);
 
-                $scope.multicheckFilterFields = [
-                    {label: 'New', value: 'IS_NEW', isChecked: true},
-                    {label: 'Approved', value: 'IS_APPROVED'},
-                    {label: 'Open', value: 'IS_OPEN', isChecked: true},
-                    {label: 'Closed', value: 'IS_CLOSED'}
-                ];
+    function AppController() {
+        var vm = this;
+
+        vm.runNum = 0;
+        vm.filter = {
+            booleanKey: [true],
+            multicheck: ['IS_NEW', 'IS_OPEN']
+        };
+        vm.filterFields = [
+            {label: 'Yes', value: true, isChecked: true},
+            {label: 'No', value: false}
+        ];
+
+        vm.multicheckFilterFields = [
+            {label: 'New', value: 'IS_NEW', isChecked: true},
+            {label: 'Approved (custom filter key)', value: 'IS_APPROVED', filterKey: 'customFilterKey'},
+            {label: 'Open', value: 'IS_OPEN', isChecked: true},
+            {label: 'Closed', value: 'IS_CLOSED'}
+        ];
+
+        vm.onFilterChange = onFilterChange;
 
 
-                $scope.onFilterChange = function() {
-                    $scope.runNum += 1;
-                }
-            }])
+        function onFilterChange() {
+            vm.runNum += 1;
+        }
+    }
 </script>
 </body>
 </html>

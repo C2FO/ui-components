@@ -108,8 +108,8 @@ module.exports = function (grunt) {
                 entry: "./src/index.js",
                 output: {
                     path: "./dist",
-                    filename: "c2fo-ui-components.bundle.js",
-                    sourceMapFilename: "c2fo-ui-components.bundle.map.js"
+                    filename: "c2fo-ui-components.js",
+                    sourceMapFilename: "c2fo-ui-components.map.js"
                 },
                 resolve: {
                     extensions: ["", ".js"]
@@ -117,6 +117,7 @@ module.exports = function (grunt) {
                 stats: false
             },
             dev: {
+                stats: true,
                 progress: true,
                 watch: true,
                 keepalive: true
@@ -129,9 +130,9 @@ module.exports = function (grunt) {
             }
         },
         exec: {
-            docs: 'yuidoc .',
+            docs: 'yuidoc <%= paths.src.root %>',
             gh_pages: {
-                command: 'yuidoc -o <%=paths.ghPages %>/docs/ .'
+                command: 'yuidoc <%= paths.src.root %> -o <%=paths.ghPages %>/docs/'
             },
             publish_gh_pages: {
                 cwd: '<%=paths.ghPages %>/',
