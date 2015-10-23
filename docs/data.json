@@ -2,49 +2,12 @@
     "project": {
         "name": "c2fo-ui-components",
         "description": "C2FO core ui components",
-        "version": "0.0.3"
+        "version": "1.1.1"
     },
-    "files": {
-        "docs/assets/vendor/bootstrap/js/bootstrap.min.js": {
-            "name": "docs/assets/vendor/bootstrap/js/bootstrap.min.js",
-            "modules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
-        "gh-pages/docs/assets/vendor/bootstrap/js/bootstrap.min.js": {
-            "name": "gh-pages/docs/assets/vendor/bootstrap/js/bootstrap.min.js",
-            "modules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        }
-    },
+    "files": {},
     "modules": {},
     "classes": {},
     "elements": {},
-    "classitems": [
-        {
-            "file": "docs/assets/vendor/bootstrap/js/bootstrap.min.js",
-            "line": 1,
-            "description": "Bootstrap.js by @fat & @mdo\nplugins: bootstrap-transition.js, bootstrap-modal.js, bootstrap-dropdown.js, bootstrap-scrollspy.js, bootstrap-tab.js, bootstrap-tooltip.js, bootstrap-popover.js, bootstrap-affix.js, bootstrap-alert.js, bootstrap-button.js, bootstrap-collapse.js, bootstrap-carousel.js, bootstrap-typeahead.js\nCopyright 2012 Twitter, Inc.\nhttp://www.apache.org/licenses/LICENSE-2.0.txt",
-            "class": ""
-        },
-        {
-            "file": "gh-pages/docs/assets/vendor/bootstrap/js/bootstrap.min.js",
-            "line": 1,
-            "description": "Bootstrap.js by @fat & @mdo\nplugins: bootstrap-transition.js, bootstrap-modal.js, bootstrap-dropdown.js, bootstrap-scrollspy.js, bootstrap-tab.js, bootstrap-tooltip.js, bootstrap-popover.js, bootstrap-affix.js, bootstrap-alert.js, bootstrap-button.js, bootstrap-collapse.js, bootstrap-carousel.js, bootstrap-typeahead.js\nCopyright 2012 Twitter, Inc.\nhttp://www.apache.org/licenses/LICENSE-2.0.txt",
-            "class": ""
-        }
-    ],
-    "warnings": [
-        {
-            "message": "Missing item type\nBootstrap.js by @fat & @mdo\nplugins: bootstrap-transition.js, bootstrap-modal.js, bootstrap-dropdown.js, bootstrap-scrollspy.js, bootstrap-tab.js, bootstrap-tooltip.js, bootstrap-popover.js, bootstrap-affix.js, bootstrap-alert.js, bootstrap-button.js, bootstrap-collapse.js, bootstrap-carousel.js, bootstrap-typeahead.js\nCopyright 2012 Twitter, Inc.\nhttp://www.apache.org/licenses/LICENSE-2.0.txt",
-            "line": " docs/assets/vendor/bootstrap/js/bootstrap.min.js:1"
-        },
-        {
-            "message": "Missing item type\nBootstrap.js by @fat & @mdo\nplugins: bootstrap-transition.js, bootstrap-modal.js, bootstrap-dropdown.js, bootstrap-scrollspy.js, bootstrap-tab.js, bootstrap-tooltip.js, bootstrap-popover.js, bootstrap-affix.js, bootstrap-alert.js, bootstrap-button.js, bootstrap-collapse.js, bootstrap-carousel.js, bootstrap-typeahead.js\nCopyright 2012 Twitter, Inc.\nhttp://www.apache.org/licenses/LICENSE-2.0.txt",
-            "line": " gh-pages/docs/assets/vendor/bootstrap/js/bootstrap.min.js:1"
-        }
-    ]
+    "classitems": [],
+    "warnings": []
 }

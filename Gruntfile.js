@@ -1,5 +1,8 @@
 'use strict';
 
+//var path = require("paths");
+var webpack = require("webpack");
+
 module.exports = function (grunt) {
     // Load grunt tasks automatically, when needed
     require('jit-grunt')(grunt);
@@ -14,16 +17,23 @@ module.exports = function (grunt) {
         pkg: grunt.file.readJSON('package.json'),
         paths: {
             // configurable paths
-            dist: 'dist',
-            components: 'src/components',
-            core: 'src/core',
-            docs: 'docs',
-            ghPages: 'gh-pages'
+            dist: {
+                root: './dist',
+                core: '<%= paths.dist.root %>/core',
+                modules: '<%= paths.dist.root %>/modules'
+            },
+            src: {
+                root: './src',
+                core: '<%= paths.src.root %>/core',
+                modules: '<%= paths.src.root %>/modules'
+            },
+            docs: './docs',
+            ghPages: './gh-pages'
 
         },
         watch: {
             less: {
-                files: ['<%= paths.components/**/*.less'],
+                files: ['<%= paths.src.modules/**/*.less'],
                 tasks: ['less:dist']
             },
             gruntfile: {
@@ -32,7 +42,7 @@ module.exports = function (grunt) {
         },
 
         clean: {
-            dist: ["<%= paths.dist %>"]
+            dist: ["<%= paths.dist.root %>"]
         },
 
         copy: {
@@ -43,29 +53,11 @@ module.exports = function (grunt) {
                 files: [
                     {
                         expand: true,
-                        cwd: '<%= paths.components %>',
+                        cwd: '<%= paths.src.root %>',
                         src: ['**/*.{js,less}'],
-                        dest: '<%= paths.dist %>/components'
-                    },
-                    {
-                        expand: true,
-                        cwd: '<%= paths.core %>',
-                        src: '**/*',
-                        dest: '<%= paths.dist %>/core'
+                        dest: '<%= paths.dist.root %>'
                     }
                 ]
-            }
-        },
-
-        less: {
-            dist: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= paths.components %>',
-                    src: ['**/*.less'],
-                    dest: '<%= paths.dist %>/components',
-                    ext: '.css'
-                }]
             }
         },
 
@@ -76,10 +68,22 @@ module.exports = function (grunt) {
                 },
                 files: [{
                     expand: true,
-                    cwd: '<%= paths.dist %>/components',
-                    src: ['**/*.js', '!**/*.min.js'],
-                    dest: '<%= paths.dist %>/components',
+                    cwd: '<%= paths.dist.root %>',
+                    src: ['**/*.js', '!**/*.min.js', '!**/index.js'],
+                    dest: '<%= paths.dist.root %>',
                     ext: '.min.js'
+                }]
+            }
+        },
+
+        less: {
+            dist: {
+                files: [{
+                    expand: true,
+                    cwd: '<%= paths.dist.root %>',
+                    src: ['**/*.less'],
+                    dest: '<%= paths.dist.root %>',
+                    ext: '.css'
                 }]
             }
         },
@@ -91,17 +95,44 @@ module.exports = function (grunt) {
                 },
                 files: [{
                     expand: true,
-                    cwd: '<%= paths.dist %>/components',
+                    cwd: '<%= paths.dist.root %>',
                     src: ['**/*.css', '!**/*.min.css'],
-                    dest: '<%= paths.dist %>/components',
+                    dest: '<%= paths.dist.root %>',
                     ext: '.min.css'
                 }]
             }
         },
+        webpack: {
+            options: {
+                // Can't use <%= paths.src.root %> for some reason
+                entry: "./src/index.js",
+                output: {
+                    path: "./dist",
+                    filename: "c2fo-ui-components.js",
+                    sourceMapFilename: "c2fo-ui-components.map.js"
+                },
+                resolve: {
+                    extensions: ["", ".js"]
+                },
+                stats: false
+            },
+            dev: {
+                stats: true,
+                progress: true,
+                watch: true,
+                keepalive: true
+            },
+
+            dist: {
+                progress: false,
+                watch: false,
+                keepalive: false
+            }
+        },
         exec: {
-            docs: 'yuidoc .',
+            docs: 'yuidoc <%= paths.src.root %>',
             gh_pages: {
-                command: 'yuidoc -o <%=paths.ghPages %>/docs/ .'
+                command: 'yuidoc <%= paths.src.root %> -o <%=paths.ghPages %>/docs/'
             },
             publish_gh_pages: {
                 cwd: '<%=paths.ghPages %>/',
@@ -113,28 +144,35 @@ module.exports = function (grunt) {
                     ].join('; ');
                 }
             }
+        },
+        karma: {
+            dev: {
+                configFile: './karma.conf.js',
+                autoWatch: true,
+                singleRun: false
+            },
+            dist: {
+                configFile: './karma.conf.js',
+                autoWatch: false,
+                singleRun: true
+            }
         }
-    })
-    ;
+    });
 
-    grunt.registerTask('docs', [
-        'exec:docs'
-    ]);
-
+    grunt.registerTask('docs', ['exec:docs']);
     grunt.registerTask('gh_pages', 'exec:gh_pages');
+    grunt.registerTask('publish_gh_pages', ['exec:gh_pages', 'exec:publish_gh_pages']);
 
-    grunt.registerTask('publish_gh_pages', [
-        'exec:gh_pages',
-        'exec:publish_gh_pages'
-    ]);
-
-//grunt.registerTask('default');
     grunt.registerTask('build', [
         'clean:dist',
         'copy:dist',
         'less:dist',
+        'webpack:dist',
         'uglify:dist',
         'cssmin:dist',
-        'docs'
+        'docs',
+        'karma:dist'
     ]);
+
+    grunt.registerTask('default', ['build']);
 };
