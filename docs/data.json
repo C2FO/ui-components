@@ -2,125 +2,12 @@
     "project": {
         "name": "c2fo-ui-components",
         "description": "C2FO core ui components",
-        "version": "1.0.0"
+        "version": "1.1.1"
     },
-    "files": {
-        "dist/c2fo-ui-components.bundle.js": {
-            "name": "dist/c2fo-ui-components.bundle.js",
-            "modules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
-        "docs/assets/vendor/bootstrap/js/bootstrap.min.js": {
-            "name": "docs/assets/vendor/bootstrap/js/bootstrap.min.js",
-            "modules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
-        "gh-pages/docs/assets/vendor/bootstrap/js/bootstrap.min.js": {
-            "name": "gh-pages/docs/assets/vendor/bootstrap/js/bootstrap.min.js",
-            "modules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        }
-    },
+    "files": {},
     "modules": {},
     "classes": {},
     "elements": {},
-    "classitems": [
-        {
-            "file": "dist/c2fo-ui-components.bundle.js",
-            "line": 1,
-            "description": "/******/ \t// The module cache\n/******/ \tvar installedModules = {};\n\n/******/ \t// The require function\n/******/ \tfunction __webpack_require__(moduleId) {\n\n/******/ \t\t// Check if module is in cache\n/******/ \t\tif(installedModules[moduleId])\n/******/ \t\t\treturn installedModules[moduleId].exports;\n\n/******/ \t\t// Create a new module (and put it into the cache)\n/******/ \t\tvar module = installedModules[moduleId] = {\n/******/ \t\t\texports: {},\n/******/ \t\t\tid: moduleId,\n/******/ \t\t\tloaded: false\n/******/ \t\t};\n\n/******/ \t\t// Execute the module function\n/******/ \t\tmodules[moduleId].call(module.exports, module, module.exports, __webpack_require__);\n\n/******/ \t\t// Flag the module as loaded\n/******/ \t\tmodule.loaded = true;\n\n/******/ \t\t// Return the exports of the module\n/******/ \t\treturn module.exports;\n/******/ \t}\n\n\n/******/ \t// expose the modules object (__webpack_modules__)\n/******/ \t__webpack_require__.m = modules;\n\n/******/ \t// expose the module cache\n/******/ \t__webpack_require__.c = installedModules;\n\n/******/ \t// __webpack_public_path__\n/******/ \t__webpack_require__.p = \"\";\n\n/******/ \t// Load entry module and return exports\n/******/ \treturn __webpack_require__(0);\n/******/ })",
-            "class": ""
-        },
-        {
-            "file": "dist/c2fo-ui-components.bundle.js",
-            "line": 43,
-            "class": ""
-        },
-        {
-            "file": "dist/c2fo-ui-components.bundle.js",
-            "line": 45,
-            "description": "\"use strict\";\nvar core = __webpack_require__(1),\n\t    modules =\nangular.module(\"c2fo.ui\", [\n\t    __webpack_require__(1),\n\t    __webpack_require__(2)\n\t]);\n\n/***/ },",
-            "class": ""
-        },
-        {
-            "file": "dist/c2fo-ui-components.bundle.js",
-            "line": 59,
-            "description": "\"use strict\";\nvar moduleName = \"c2fo.ui.core\";\nangular.module(moduleName, []);\nmodule.exports = moduleName;\n\n/***/ },",
-            "class": ""
-        },
-        {
-            "file": "dist/c2fo-ui-components.bundle.js",
-            "line": 71,
-            "description": "\"use strict\";\nvar moduleName = \"c2fo.ui.modules\";\nangular.module(moduleName, [\n\t    __webpack_require__(3),\n\t    __webpack_require__(4)\n\t]);\nmodule.exports = moduleName;\n\n/***/ },",
-            "class": ""
-        },
-        {
-            "file": "dist/c2fo-ui-components.bundle.js",
-            "line": 86,
-            "description": "'use strict';\nvar moduleName = 'c2fo.ui.modules.checkboxFilterGroup';\nangular.module(moduleName, [])\n\t    .directive('c2foCheckboxFilterGroup', [function () {\n\t        return {\n\t            restrict: 'E',\n\t            scope: {\n\t                label: '@',\n\t                fields: '=',\n\t                filter: '=',\n\t                filterKey: '@',\n\t                multicheck: '=',\n\t                onUpdate: '&'\n\t            },\n\t            template: [\n\t                '<div class=\"c2fo-ui-checkbox-filter-group\">',\n\t                '   <div class=\"heading\">{{checkBoxFilterGroupCtrl.label}}</div>',\n\t                '   <div class=\"checkbox\" ng-repeat=\"field in checkBoxFilterGroupCtrl.fields\">',\n\t                '       <label>',\n\t                '           <input type=\"checkbox\" ng-model=\"field.isChecked\" ng-click=\"checkBoxFilterGroupCtrl.updateFilter($event)\"/>',\n\t                '           {{field.label}}',\n\t                '       </label>',\n\t                '   </div>',\n\t                '</div>'\n\t            ].join('').replace(/\\s\\s+/g, ''),\n\t            controller: 'CheckboxFilterGroupController',\n\t            controllerAs: 'checkBoxFilterGroupCtrl',\n\t            bindToController: true\n\t        };\n\t    }])\n\t    .controller('CheckboxFilterGroupController', ['$timeout', function ($timeout) {\n\t        var vm = this;\n        vm.updateFilter = updateFilter;\n        function updateFilter(event) {\n\t            if (vm.multicheck) {\n\t                var values = [];\n                vm.fields.forEach(function (field) {\n\t                    if (field.isChecked === true) {\n\t                        values.push(field.value);\n\t                    }\n\t                });\n\t                vm.filter[vm.filterKey] = values;\n\t            } else {\n\t                var filterField = angular.element(event.target).scope().field,\n\t                    isChecked = angular.copy(filterField.isChecked);\n                // Flag all fields as not checked\n\t                vm.fields.map(function (field) {\n\t                    field.isChecked = false;\n\t                    return field;\n\t                });\n                // Reapply our checked status from a previously cloned value\n\t                filterField.isChecked = isChecked;\n                vm.filter[vm.filterKey] = (filterField.isChecked === true) ? [filterField.value] : [];\n\t            }\n\n            $timeout(function () {\n\t                if (vm.onUpdate()) {\n\t                    vm.onUpdate()(vm.filter);\n\t                }\n\t            });\n\t        }\n\t    }]);\nmodule.exports = moduleName;\n\n/***/ },",
-            "class": ""
-        },
-        {
-            "file": "dist/c2fo-ui-components.bundle.js",
-            "line": 164,
-            "description": "'use strict';\nvar moduleName = 'c2fo.ui.modules.pager';\nangular.module(moduleName, [])\n\t    .directive('c2foPager', [function () {\n\t        return {\n\t            restrict: 'E',\n\t            scope: {\n\t                currentPage: '=',\n\t                previousPage: '=',\n\t                hasPreviousPage: '=',\n\t                previousPageCount: '=',\n\t                nextPage: '=',\n\t                hasNextPage: '=',\n\t                nextPageCount: '=',\n\t                totalPages: '=',\n\t                onPageChange: '&'\n\t            },\n\t            template: [\n\t                '<nav>',\n\t                '   <ul class=\"pager\">',\n\t                '       <li class=\"previous\" ng-class=\"{\\'disabled\\': !pagerCtrl.hasPreviousPage}\">',\n\t                '           <a href=\"#\" ng-click=\"pagerCtrl.handlePageChange(pagerCtrl.previousPage)\">',\n\t                '               <span aria-hidden=\"true\">&larr;</span>',\n\t                '               Previous',\n\t                '           </a>',\n\t                '       </li>',\n\t                '       <li ng-repeat=\"pageNumber in pagerCtrl.range(pagerCtrl.previousPageCount, true) track by $index\"',\n\t                '           ng-show=\"(pagerCtrl.previousPageCount > 0) && (pagerCtrl.currentPage - (pageNumber + 1)) > 0\">',\n\t                '           <a href=\"#\" ng-click=\"pagerCtrl.handlePageChange(pagerCtrl.currentPage - (pageNumber + 1))\">',\n\t                '               {{pagerCtrl.currentPage - (pageNumber + 1)}}',\n\t                '           </a>',\n\t                '       </li>',\n\t                '       <li class=\"active\">',\n\t                '           <a href=\"#\" ng-click=\"pagerCtrl.currentPage\">{{pagerCtrl.currentPage}}</a>',\n\t                '       </li>',\n\t                '       <li ng-repeat=\"pageNumber in pagerCtrl.range(pagerCtrl.nextPageCount) track by $index\"',\n\t                '           ng-show=\"(pagerCtrl.nextPageCount > 0) && (pagerCtrl.currentPage + (pageNumber + 1)) < pagerCtrl.totalPages\">',\n\t                '           <a href=\"#\" ng-click=\"pagerCtrl.handlePageChange(pagerCtrl.currentPage + (pageNumber + 1))\">',\n\t                '               {{pagerCtrl.currentPage + (pageNumber + 1)}}',\n\t                '           </a>',\n\t                '       </li>',\n\t                '           <li class=\"next\" ng-class=\"{\\'disabled\\': !pagerCtrl.hasNextPage}\">',\n\t                '           <a href=\"#\" ng-click=\"pagerCtrl.handlePageChange(pagerCtrl.nextPage)\">',\n\t                '               Next',\n\t                '               <span aria-hidden=\"true\">&rarr;</span>',\n\t                '           </a>',\n\t                '       </li>',\n\t                '   </ul>',\n\t                '</nav>'\n\t            ].join('').replace(/\\s\\s+/g, ''),\n\t            controller: 'PagerController',\n\t            controllerAs: 'pagerCtrl',\n\t            bindToController: true\n\t        };\n\t    }])\n\t    .controller('PagerController', [function () {\n\t        var vm = this;\n        vm.handlePageChange = handlePageChange;\n\t        vm.range = range;\n        function handlePageChange(pageNumber) {\n\t            if (!pageNumber) {\n\t                return false;\n\t            }\n            vm.onPageChange()(pageNumber);\n\t        }\n        function range(num, reverse) {\n\t            var ret = [];\n            for (var i = 0; i < num; i++) {\n\t                ret.push(i);\n\t            }\n            if (reverse) {\n\t                ret.reverse();\n\t            }\n            return ret;\n\t        }\n\t    }]);\nmodule.exports = moduleName;\n\n/***/ }\n/******/ ]);",
-            "class": ""
-        },
-        {
-            "file": "docs/assets/vendor/bootstrap/js/bootstrap.min.js",
-            "line": 1,
-            "description": "Bootstrap.js by @fat & @mdo\nplugins: bootstrap-transition.js, bootstrap-modal.js, bootstrap-dropdown.js, bootstrap-scrollspy.js, bootstrap-tab.js, bootstrap-tooltip.js, bootstrap-popover.js, bootstrap-affix.js, bootstrap-alert.js, bootstrap-button.js, bootstrap-collapse.js, bootstrap-carousel.js, bootstrap-typeahead.js\nCopyright 2012 Twitter, Inc.\nhttp://www.apache.org/licenses/LICENSE-2.0.txt",
-            "class": ""
-        },
-        {
-            "file": "gh-pages/docs/assets/vendor/bootstrap/js/bootstrap.min.js",
-            "line": 1,
-            "description": "Bootstrap.js by @fat & @mdo\nplugins: bootstrap-transition.js, bootstrap-modal.js, bootstrap-dropdown.js, bootstrap-scrollspy.js, bootstrap-tab.js, bootstrap-tooltip.js, bootstrap-popover.js, bootstrap-affix.js, bootstrap-alert.js, bootstrap-button.js, bootstrap-collapse.js, bootstrap-carousel.js, bootstrap-typeahead.js\nCopyright 2012 Twitter, Inc.\nhttp://www.apache.org/licenses/LICENSE-2.0.txt",
-            "class": ""
-        }
-    ],
-    "warnings": [
-        {
-            "message": "Missing item type\n/******/ \t// The module cache\n/******/ \tvar installedModules = {};\n\n/******/ \t// The require function\n/******/ \tfunction __webpack_require__(moduleId) {\n\n/******/ \t\t// Check if module is in cache\n/******/ \t\tif(installedModules[moduleId])\n/******/ \t\t\treturn installedModules[moduleId].exports;\n\n/******/ \t\t// Create a new module (and put it into the cache)\n/******/ \t\tvar module = installedModules[moduleId] = {\n/******/ \t\t\texports: {},\n/******/ \t\t\tid: moduleId,\n/******/ \t\t\tloaded: false\n/******/ \t\t};\n\n/******/ \t\t// Execute the module function\n/******/ \t\tmodules[moduleId].call(module.exports, module, module.exports, __webpack_require__);\n\n/******/ \t\t// Flag the module as loaded\n/******/ \t\tmodule.loaded = true;\n\n/******/ \t\t// Return the exports of the module\n/******/ \t\treturn module.exports;\n/******/ \t}\n\n\n/******/ \t// expose the modules object (__webpack_modules__)\n/******/ \t__webpack_require__.m = modules;\n\n/******/ \t// expose the module cache\n/******/ \t__webpack_require__.c = installedModules;\n\n/******/ \t// __webpack_public_path__\n/******/ \t__webpack_require__.p = \"\";\n\n/******/ \t// Load entry module and return exports\n/******/ \treturn __webpack_require__(0);\n/******/ })",
-            "line": " dist/c2fo-ui-components.bundle.js:1"
-        },
-        {
-            "message": "Missing item type",
-            "line": " dist/c2fo-ui-components.bundle.js:43"
-        },
-        {
-            "message": "Missing item type\n\"use strict\";\nvar core = __webpack_require__(1),\n\t    modules =\nangular.module(\"c2fo.ui\", [\n\t    __webpack_require__(1),\n\t    __webpack_require__(2)\n\t]);\n\n/***/ },",
-            "line": " dist/c2fo-ui-components.bundle.js:45"
-        },
-        {
-            "message": "Missing item type\n\"use strict\";\nvar moduleName = \"c2fo.ui.core\";\nangular.module(moduleName, []);\nmodule.exports = moduleName;\n\n/***/ },",
-            "line": " dist/c2fo-ui-components.bundle.js:59"
-        },
-        {
-            "message": "Missing item type\n\"use strict\";\nvar moduleName = \"c2fo.ui.modules\";\nangular.module(moduleName, [\n\t    __webpack_require__(3),\n\t    __webpack_require__(4)\n\t]);\nmodule.exports = moduleName;\n\n/***/ },",
-            "line": " dist/c2fo-ui-components.bundle.js:71"
-        },
-        {
-            "message": "Missing item type\n'use strict';\nvar moduleName = 'c2fo.ui.modules.checkboxFilterGroup';\nangular.module(moduleName, [])\n\t    .directive('c2foCheckboxFilterGroup', [function () {\n\t        return {\n\t            restrict: 'E',\n\t            scope: {\n\t                label: '@',\n\t                fields: '=',\n\t                filter: '=',\n\t                filterKey: '@',\n\t                multicheck: '=',\n\t                onUpdate: '&'\n\t            },\n\t            template: [\n\t                '<div class=\"c2fo-ui-checkbox-filter-group\">',\n\t                '   <div class=\"heading\">{{checkBoxFilterGroupCtrl.label}}</div>',\n\t                '   <div class=\"checkbox\" ng-repeat=\"field in checkBoxFilterGroupCtrl.fields\">',\n\t                '       <label>',\n\t                '           <input type=\"checkbox\" ng-model=\"field.isChecked\" ng-click=\"checkBoxFilterGroupCtrl.updateFilter($event)\"/>',\n\t                '           {{field.label}}',\n\t                '       </label>',\n\t                '   </div>',\n\t                '</div>'\n\t            ].join('').replace(/\\s\\s+/g, ''),\n\t            controller: 'CheckboxFilterGroupController',\n\t            controllerAs: 'checkBoxFilterGroupCtrl',\n\t            bindToController: true\n\t        };\n\t    }])\n\t    .controller('CheckboxFilterGroupController', ['$timeout', function ($timeout) {\n\t        var vm = this;\n        vm.updateFilter = updateFilter;\n        function updateFilter(event) {\n\t            if (vm.multicheck) {\n\t                var values = [];\n                vm.fields.forEach(function (field) {\n\t                    if (field.isChecked === true) {\n\t                        values.push(field.value);\n\t                    }\n\t                });\n\t                vm.filter[vm.filterKey] = values;\n\t            } else {\n\t                var filterField = angular.element(event.target).scope().field,\n\t                    isChecked = angular.copy(filterField.isChecked);\n                // Flag all fields as not checked\n\t                vm.fields.map(function (field) {\n\t                    field.isChecked = false;\n\t                    return field;\n\t                });\n                // Reapply our checked status from a previously cloned value\n\t                filterField.isChecked = isChecked;\n                vm.filter[vm.filterKey] = (filterField.isChecked === true) ? [filterField.value] : [];\n\t            }\n\n            $timeout(function () {\n\t                if (vm.onUpdate()) {\n\t                    vm.onUpdate()(vm.filter);\n\t                }\n\t            });\n\t        }\n\t    }]);\nmodule.exports = moduleName;\n\n/***/ },",
-            "line": " dist/c2fo-ui-components.bundle.js:86"
-        },
-        {
-            "message": "Missing item type\n'use strict';\nvar moduleName = 'c2fo.ui.modules.pager';\nangular.module(moduleName, [])\n\t    .directive('c2foPager', [function () {\n\t        return {\n\t            restrict: 'E',\n\t            scope: {\n\t                currentPage: '=',\n\t                previousPage: '=',\n\t                hasPreviousPage: '=',\n\t                previousPageCount: '=',\n\t                nextPage: '=',\n\t                hasNextPage: '=',\n\t                nextPageCount: '=',\n\t                totalPages: '=',\n\t                onPageChange: '&'\n\t            },\n\t            template: [\n\t                '<nav>',\n\t                '   <ul class=\"pager\">',\n\t                '       <li class=\"previous\" ng-class=\"{\\'disabled\\': !pagerCtrl.hasPreviousPage}\">',\n\t                '           <a href=\"#\" ng-click=\"pagerCtrl.handlePageChange(pagerCtrl.previousPage)\">',\n\t                '               <span aria-hidden=\"true\">&larr;</span>',\n\t                '               Previous',\n\t                '           </a>',\n\t                '       </li>',\n\t                '       <li ng-repeat=\"pageNumber in pagerCtrl.range(pagerCtrl.previousPageCount, true) track by $index\"',\n\t                '           ng-show=\"(pagerCtrl.previousPageCount > 0) && (pagerCtrl.currentPage - (pageNumber + 1)) > 0\">',\n\t                '           <a href=\"#\" ng-click=\"pagerCtrl.handlePageChange(pagerCtrl.currentPage - (pageNumber + 1))\">',\n\t                '               {{pagerCtrl.currentPage - (pageNumber + 1)}}',\n\t                '           </a>',\n\t                '       </li>',\n\t                '       <li class=\"active\">',\n\t                '           <a href=\"#\" ng-click=\"pagerCtrl.currentPage\">{{pagerCtrl.currentPage}}</a>',\n\t                '       </li>',\n\t                '       <li ng-repeat=\"pageNumber in pagerCtrl.range(pagerCtrl.nextPageCount) track by $index\"',\n\t                '           ng-show=\"(pagerCtrl.nextPageCount > 0) && (pagerCtrl.currentPage + (pageNumber + 1)) < pagerCtrl.totalPages\">',\n\t                '           <a href=\"#\" ng-click=\"pagerCtrl.handlePageChange(pagerCtrl.currentPage + (pageNumber + 1))\">',\n\t                '               {{pagerCtrl.currentPage + (pageNumber + 1)}}',\n\t                '           </a>',\n\t                '       </li>',\n\t                '           <li class=\"next\" ng-class=\"{\\'disabled\\': !pagerCtrl.hasNextPage}\">',\n\t                '           <a href=\"#\" ng-click=\"pagerCtrl.handlePageChange(pagerCtrl.nextPage)\">',\n\t                '               Next',\n\t                '               <span aria-hidden=\"true\">&rarr;</span>',\n\t                '           </a>',\n\t                '       </li>',\n\t                '   </ul>',\n\t                '</nav>'\n\t            ].join('').replace(/\\s\\s+/g, ''),\n\t            controller: 'PagerController',\n\t            controllerAs: 'pagerCtrl',\n\t            bindToController: true\n\t        };\n\t    }])\n\t    .controller('PagerController', [function () {\n\t        var vm = this;\n        vm.handlePageChange = handlePageChange;\n\t        vm.range = range;\n        function handlePageChange(pageNumber) {\n\t            if (!pageNumber) {\n\t                return false;\n\t            }\n            vm.onPageChange()(pageNumber);\n\t        }\n        function range(num, reverse) {\n\t            var ret = [];\n            for (var i = 0; i < num; i++) {\n\t                ret.push(i);\n\t            }\n            if (reverse) {\n\t                ret.reverse();\n\t            }\n            return ret;\n\t        }\n\t    }]);\nmodule.exports = moduleName;\n\n/***/ }\n/******/ ]);",
-            "line": " dist/c2fo-ui-components.bundle.js:164"
-        },
-        {
-            "message": "Missing item type\nBootstrap.js by @fat & @mdo\nplugins: bootstrap-transition.js, bootstrap-modal.js, bootstrap-dropdown.js, bootstrap-scrollspy.js, bootstrap-tab.js, bootstrap-tooltip.js, bootstrap-popover.js, bootstrap-affix.js, bootstrap-alert.js, bootstrap-button.js, bootstrap-collapse.js, bootstrap-carousel.js, bootstrap-typeahead.js\nCopyright 2012 Twitter, Inc.\nhttp://www.apache.org/licenses/LICENSE-2.0.txt",
-            "line": " docs/assets/vendor/bootstrap/js/bootstrap.min.js:1"
-        },
-        {
-            "message": "Missing item type\nBootstrap.js by @fat & @mdo\nplugins: bootstrap-transition.js, bootstrap-modal.js, bootstrap-dropdown.js, bootstrap-scrollspy.js, bootstrap-tab.js, bootstrap-tooltip.js, bootstrap-popover.js, bootstrap-affix.js, bootstrap-alert.js, bootstrap-button.js, bootstrap-collapse.js, bootstrap-carousel.js, bootstrap-typeahead.js\nCopyright 2012 Twitter, Inc.\nhttp://www.apache.org/licenses/LICENSE-2.0.txt",
-            "line": " gh-pages/docs/assets/vendor/bootstrap/js/bootstrap.min.js:1"
-        }
-    ]
+    "classitems": [],
+    "warnings": []
 }
