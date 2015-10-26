@@ -7,7 +7,7 @@ C2FO core ui components
 
 ## Documentation
 
-http://c2fo.github.io/ui-components/
+[http://c2fo.github.io/ui-components/]()
 
 ## Developer
 
@@ -23,42 +23,17 @@ http://c2fo.github.io/ui-components/
 
 `grunt karma:dev` - Watcher for karma tests
 
-### Github Pages / Documentation
-This project uses git submodules and requires extra parameters for cloning to begin work.
+### Documentation
 
-```bash
-git clone --recursive git@github.com:C2FO/ui-components.git
-```
+Documentation branch - `git co docs`
 
-or
-
-```bash    
-git clone git@github.com:C2FO/ui-components.git
-cd ui-components
-git submodule update --init --recursive
-```
-
-#### Generating Documentation
-yuidoc - http://yui.github.io/yuidoc/
-
-```bash
-# Install yuidoc globally. This is preferred by the module.
-npm install -g yuidocjs
-```
-
-```bash
-#### Confirm your changes with the yuidoc server
-yuidoc . --server 
-
-#### Build main repo documentation
-grunt docs
-
-#### Publish documentation to github pages (c2fo.github.io/ui-components/docs)
-grunt publish_gh_pages
-```
+[https://github.com/tripit/slate]()
 
 ### Change Log
-
+* 1.2.0
+    * absolute value filter
+    * boolean filter
+    * documentation tooling via slate
 * 1.1.1
     * Match c2fo style guide for module components
     * Add custom filter key functionality for checkboxFilterGroup
