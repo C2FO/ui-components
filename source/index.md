@@ -1,129 +1,141 @@
 ---
 title: C2FO UI Components
 
-language_tabs:
-  - javascript
-
 toc_footers:
   - <a href='https://github.com/C2FO/ui-components'>Github</a>
-
-includes:
-  - errors
+  - <a href='https://github.com/C2FO/ui-guide'>C2FO UI Guide</a>
+  - <a href='https://github.com/C2FO/angular-styleguide'>Angular Style Guide</a>
 
 search: true
 ---
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+The C2FO ui component library is designed to be an all-encompassing library for C2FO ui components. 
+Built on top of our [angular-style-guide](https://github.com/C2FO/angular-styleguide)
+and [ui-guide](https://github.com/C2FO/ui-guide), the ui component library gives a stable testing 
+ground for the shared frontend resources across our applications.
 
-We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+# Getting Started
 
-This example API documentation page was created with [Slate](http://github.com/tripit/slate). Feel free to edit it and use it as a base for your own API's documentation.
+## Installation
 
-# Authentication
+`npm install --save c2fo-ui-components` 
 
-> To authorize, use this code:
+<aside class="warning">It is assumed that you already angular installed.</aside>
 
-```ruby
-require 'kittn'
+## Usage
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
+All modules are available through a bundled script or as commonjs modules. Using the commonjs 
+module approach you can pick and choose exactly what modules you need for your use case. 
+
+<aside class="notice">Some component modules have css files associated with them 
+and will need to be loaded as well.</aside>
+
+### CommonJS
+
+Recommended loading pattern for enhanced flexbility and debugging capabilities.
+
+```javascript
+/*
+ * CommonJS
+ */
+var angular = require('angular');
+require('c2fo-ui-components');
+
+// Add the entire ui library as a dependency
+angular.module('app', [
+  'c2fo.ui'
+]);
+
+// Only load a few modules
+//  Note: You should only use the required amount of source code if you choose this path.
+angular.module('app', [
+  'c2fo.ui.modules.pager'
+]);
 ```
 
-> Make sure to replace `meowmeowmeow` with your API key.
+### Static
 
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-
-# Kittens
-
-## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
+If CommonJS is not avaible then you can you the static bundled source code, 
+but a bundled copy of the source code is available for static serving as well.
+ 
+```html
+<!--
+  Static Bundled HTML
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="/scripts/c2fo-ui-components/dist/c2fo-ui-components.min.css"/>
+  </head>
+<body class="container">
+  <div ng-app="app"></div>
+  <script src="/scripts/angular/angular.min.js"></script>
+  <script src="/scripts/c2fo-ui-components/dist/c2fo-ui-components.min.js"></script>
+  <script>
+    angular.module('app', ['c2fo.ui']);
+  </script>
+</body>
+</html>
 ```
 
-> The above command returns JSON structured like this:
+<aside class="notice">All javascript and css files come with associated source maps</aside>
 
-```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Isis",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
-```
+# Filters
 
-This endpoint retrieves all kittens.
+## Absolute Value
 
-### HTTP Request
+Return the absolute value of a number.
 
-`GET http://example.com/api/kittens`
+### Module Name
 
-### Query Parameters
+`c2fo.ui.modules.absoluteValueFilter`
 
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
+### Parameters
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
+Type | Default | Required | Description
+------- | ------- |  ------- | -----------
+Number | undefined | true | The number to get the absolute value of.
 
-## Get a Specific Kitten
+### Usage
 
-```ruby
-require 'kittn'
+```js
+angular.module('app', []).controller(appController);
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "name": "Isis",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
+appController.$inject = ['$filter'];
+function appController($filter) {
+  $filter('abs')(-7); // 7
 }
 ```
 
-This endpoint retrieves a specific kitten.
+## Boolean
 
-<aside class="warning">If you're not using an administrator API key, note that some kittens will return 403 Forbidden if they are hidden for admins only.</aside>
+Convert boolean values to string representations.
 
-### HTTP Request
+### Module Name
 
-`GET http://example.com/kittens/<ID>`
+`c2fo.ui.modules.booleanFilter`
 
-### URL Parameters
+### Parameters
+Type | Default | Required | Description
+------- | ------- |  ------- | -----------
+Varies | undefined | true | The value to convert to a boolean string representation.
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
+### Usage
 
+```js
+angular.module('app', []).controller(appController);
+
+appController.$inject = ['$filter'];
+function appController($filter) {
+  $filter('boolean')({}); // 'T'
+  $filter('boolean')([]); // 'T'
+  $filter('boolean')(true); // 'T'
+  $filter('boolean')(1); // 'T'
+  
+  $filter('boolean')(''); // 'F'
+  $filter('boolean')(false); // 'F'
+  $filter('boolean')(0); // 'F'
+}
+```
