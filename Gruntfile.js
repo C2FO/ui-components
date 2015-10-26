@@ -129,22 +129,6 @@ module.exports = function (grunt) {
                 keepalive: false
             }
         },
-        exec: {
-            docs: 'yuidoc <%= paths.src.root %>',
-            gh_pages: {
-                command: 'yuidoc <%= paths.src.root %> -o <%=paths.ghPages %>/docs/'
-            },
-            publish_gh_pages: {
-                cwd: '<%=paths.ghPages %>/',
-                command: function () {
-                    return [
-                        'git add .',
-                        'git commit -m \'Creating github pages documentation snapshot\'',
-                        'git push origin gh-pages'
-                    ].join('; ');
-                }
-            }
-        },
         karma: {
             dev: {
                 configFile: './karma.conf.js',
@@ -159,10 +143,6 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.registerTask('docs', ['exec:docs']);
-    grunt.registerTask('gh_pages', 'exec:gh_pages');
-    grunt.registerTask('publish_gh_pages', ['exec:gh_pages', 'exec:publish_gh_pages']);
-
     grunt.registerTask('build', [
         'clean:dist',
         'copy:dist',
@@ -170,7 +150,6 @@ module.exports = function (grunt) {
         'webpack:dist',
         'uglify:dist',
         'cssmin:dist',
-        'docs',
         'karma:dist'
     ]);
 
