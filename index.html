@@ -106,6 +106,251 @@ but a bundled copy of the source code is available for static serving as well.</
 
 <aside class="notice">All javascript and css files come with associated source maps</aside>
 
+<h1 id="directives">Directives</h1>
+
+<h2 id="checkbox-filter-group">Checkbox Filter Group</h2>
+
+<p>A group of checkboxes to </p>
+
+<h3 id="module-name">Module Name</h3>
+
+<p><code class="prettyprint">c2fo.ui.modules.checkboxFilterGroup</code></p>
+
+<h3 id="parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>label</td>
+<td>String</td>
+<td>undefined</td>
+<td>false</td>
+<td>The string representation of checkbox group&rsquo;s title.</td>
+</tr>
+<tr>
+<td>fields</td>
+<td>Array</td>
+<td>undefined</td>
+<td>true</td>
+<td>An array of field objects. Each field can write to it&rsquo;s own &ldquo;filter-key&rdquo; by setting an optional attribute of filterKey within the field declaration.</td>
+</tr>
+<tr>
+<td>filter</td>
+<td>Object</td>
+<td>undefined</td>
+<td>true</td>
+<td>The filter reference object.</td>
+</tr>
+<tr>
+<td>filter-key</td>
+<td>String</td>
+<td>undefined</td>
+<td>true</td>
+<td>The filter object key to store values in. Values will always be stored in an array format.</td>
+</tr>
+<tr>
+<td>multicheck</td>
+<td>Boolean</td>
+<td>false</td>
+<td>false</td>
+<td>Setting multicheck to false let&rsquo;s the filter group act as a radio button group (only one value can be selected at a time). Setting multicheck to true allows multiple values to be selected and stored.</td>
+</tr>
+<tr>
+<td>on-update</td>
+<td>Function</td>
+<td>undefined</td>
+<td>false</td>
+<td>Optional callback for when a checkbox is selected.</td>
+</tr>
+</tbody></table>
+
+<h3 id="usage-javascript">Usage (Javascript)</h3>
+<pre class="highlight javascript"><code><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">'app'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'c2fo.ui.modules.checkboxFilterGroup'</span><span class="p">]).</span><span class="nx">controller</span><span class="p">(</span><span class="nx">AppController</span><span class="p">);</span>
+
+<span class="nx">AppController</span><span class="p">.</span><span class="nx">$inject</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="kd">function</span> <span class="nx">AppController</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">vm</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+
+  <span class="cm">/*
+   * If all of these fields were checked then the output would like. 
+
+      vm.filter =&gt; {
+        custom-filter-key: ['new-value']
+        status: ['approved-value', peer-reviewed-value, 'closed-value']
+      }
+
+   * By applying a filterKey in the field declaration you can override the base group value and group things
+   * that may have semantic meaning to the end user, but don't correlate together in your system.
+   */</span>
+  <span class="nx">vm</span><span class="p">.</span><span class="nx">fields</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="na">label</span><span class="p">:</span> <span class="s1">'New'</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="s1">'new-value'</span><span class="p">,</span> <span class="na">filterKey</span><span class="p">:</span> <span class="s1">'custom-filter-key'</span><span class="p">},</span>
+    <span class="p">{</span> <span class="na">label</span><span class="p">:</span> <span class="s1">'Approved'</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="s1">'approved-value'</span><span class="p">},</span>
+    <span class="p">{</span> <span class="na">label</span><span class="p">:</span> <span class="s1">'Peer Reviewed'</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="s1">'peer-reviewed-value'</span><span class="p">},</span>
+    <span class="p">{</span> <span class="na">label</span><span class="p">:</span> <span class="s1">'Closed'</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="s1">'closed-value'</span><span class="p">}</span>
+  <span class="p">]</span>
+
+  <span class="nx">vm</span><span class="p">.</span><span class="nx">filter</span> <span class="o">=</span> <span class="p">{};</span>
+
+  <span class="nx">vm</span><span class="p">.</span><span class="nx">onUpdate</span> <span class="o">=</span> <span class="nx">onUpdate</span><span class="p">;</span>
+
+  <span class="kd">function</span> <span class="nx">onUpdate</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">vm</span><span class="p">.</span><span class="nx">filter</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<h3 id="usage-html-view">Usage (HTML View)</h3>
+<pre class="highlight html"><code><span class="nt">&lt;c2fo-checkbox-filter-group</span>
+  <span class="na">label=</span><span class="s">"Status"</span>
+  <span class="na">fields=</span><span class="s">"appCtrl.fields"</span>
+  <span class="na">filter=</span><span class="s">"appCtrl.filter"</span>
+  <span class="na">filter-key=</span><span class="s">"status"</span>
+  <span class="na">multicheck=</span><span class="s">"true"</span>
+  <span class="na">on-update=</span><span class="s">"appCtrl.onUpdate"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/c2fo-checkbox-filter-group&gt;</span>
+</code></pre>
+
+<h2 id="pager">Pager</h2>
+
+<p>Data list pagination helper.</p>
+
+<h3 id="module-name">Module Name</h3>
+
+<p><code class="prettyprint">c2fo.ui.modules.pager</code></p>
+
+<h3 id="parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>current-page</td>
+<td>Integer</td>
+<td>undefined</td>
+<td>true</td>
+<td>The id for the current dataset page.</td>
+</tr>
+<tr>
+<td>previous-page</td>
+<td>Integer</td>
+<td>undefined</td>
+<td>true</td>
+<td>The id for the previous dataset page.</td>
+</tr>
+<tr>
+<td>has-previous-page</td>
+<td>Boolean</td>
+<td>false</td>
+<td>true</td>
+<td>True if the current dataset has preceding data.</td>
+</tr>
+<tr>
+<td>next-page</td>
+<td>Integer</td>
+<td>undefined</td>
+<td>true</td>
+<td>The id for next dataset page.</td>
+</tr>
+<tr>
+<td>has-next-page</td>
+<td>Boolean</td>
+<td>false</td>
+<td>true</td>
+<td>True if the current dataset has more data.</td>
+</tr>
+<tr>
+<td>total-pages</td>
+<td>Integer</td>
+<td>undefined</td>
+<td>true</td>
+<td>The total number of pages in the dataset.</td>
+</tr>
+<tr>
+<td>on-page-change</td>
+<td>Function</td>
+<td>undefined</td>
+<td>true</td>
+<td>The callback function for when a page changes. Returns an integer value of page dataset to show.</td>
+</tr>
+<tr>
+<td>previous-page-count</td>
+<td>Integer</td>
+<td>0</td>
+<td>false</td>
+<td>The number of quick links to show for previous pages.</td>
+</tr>
+<tr>
+<td>next-page-count</td>
+<td>Integer</td>
+<td>0</td>
+<td>false</td>
+<td>The number of quick links to show for next pages.</td>
+</tr>
+</tbody></table>
+
+<h3 id="usage-javascript">Usage (Javascript)</h3>
+<pre class="highlight javascript"><code><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">'app'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'c2fo.ui.modules.pager'</span><span class="p">]).</span><span class="nx">controller</span><span class="p">(</span><span class="nx">AppController</span><span class="p">);</span>
+
+<span class="nx">AppController</span><span class="p">.</span><span class="nx">$inject</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="kd">function</span> <span class="nx">AppController</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">vm</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+
+  <span class="nx">vm</span><span class="p">.</span><span class="nx">filter</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">page</span><span class="p">:</span> <span class="mi">1</span>
+  <span class="p">};</span>  
+  <span class="nx">vm</span><span class="p">.</span><span class="nx">numPreviousLinks</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+  <span class="nx">vm</span><span class="p">.</span><span class="nx">onPageChange</span> <span class="o">=</span> <span class="nx">onPageChange</span><span class="p">;</span>
+
+  <span class="kd">function</span> <span class="nx">onPageChange</span><span class="p">(</span><span class="nx">pageNumber</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">vm</span><span class="p">.</span><span class="nx">filter</span><span class="p">.</span><span class="nx">page</span> <span class="o">=</span> <span class="nx">pageNumber</span><span class="p">;</span>
+      <span class="nx">vm</span><span class="p">.</span><span class="nx">invoices</span> <span class="o">=</span> <span class="nx">_getInvoices</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="kd">function</span> <span class="nx">_getInvoices</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="na">data</span><span class="p">:</span> <span class="p">[],</span> <span class="c1">// invoice data</span>
+      <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">currentPage</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="na">totalPages</span><span class="p">:</span> <span class="mi">22</span><span class="p">,</span>
+        <span class="na">hasPreviousPage</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="na">previousPage</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="na">hasNextPage</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="na">nextPage</span><span class="p">:</span> <span class="mi">5</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre>
+
+<h3 id="usage-html-view">Usage (HTML View)</h3>
+<pre class="highlight html"><code>
+<span class="nt">&lt;c2fo-pager</span>
+    <span class="na">current-page=</span><span class="s">"appCtrl.invoices.meta.currentPage"</span>
+    <span class="na">total-pages=</span><span class="s">"appCtrl.invoices.meta.totalPages"</span>
+    <span class="na">has-previous-page=</span><span class="s">"appCtrl.invoices.meta.hasPreviousPage"</span>
+    <span class="na">previous-page=</span><span class="s">"appCtrl.invoices.meta.previousPage"</span>
+    <span class="na">has-next-page=</span><span class="s">"appCtrl.invoices.meta.hasNextPage"</span>
+    <span class="na">next-page=</span><span class="s">"appCtrl.invoices.meta.nextPage"</span>
+    <span class="na">previous-page-count=</span><span class="s">"appCtrl.numPreviousLinks"</span>
+    <span class="na">next-page-count=</span><span class="s">"appCtrl.numPreviousLinks"</span>
+    <span class="na">on-page-change=</span><span class="s">"appCtrl.onPageChange"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/c2fo-pager&gt;</span>
+</code></pre>
+
 <h1 id="filters">Filters</h1>
 
 <h2 id="absolute-value">Absolute Value</h2>
