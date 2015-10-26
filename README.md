@@ -3,7 +3,7 @@ C2FO core ui components
 
 ## Documentation
 
-[http://c2fo.github.io/ui-components/]()
+[http://c2fo.github.io/ui-components/](http://c2fo.github.io/ui-components/)
 
 ## Developer
 
