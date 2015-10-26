@@ -1,10 +1,6 @@
 # ui-components
 C2FO core ui components
 
-## Installing
-
-`npm install --save c2fo-ui-components`
-
 ## Documentation
 
 [http://c2fo.github.io/ui-components/]()
