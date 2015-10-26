@@ -1,7 +1,7 @@
 "use strict";
 
 describe('Pager Controller', function () {
-    beforeEach(module('c2fo.ui'));
+    beforeEach(module('c2fo.ui.modules.pager'));
 
     var controller,
         scope;

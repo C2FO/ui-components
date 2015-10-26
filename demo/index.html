@@ -33,6 +33,34 @@
     </c2fo-checkbox-filter-group>
 
     <pre>{{appCtrl.filter | json}}</pre>
+
+    <h1>Filters</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Input</th>
+            <th>Output</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>abs</td>
+            <td>-7</td>
+            <td>{{-7 | abs}}</td>
+        </tr>
+        <tr>
+            <td>boolean</td>
+            <td>{}, [], true, 1</td>
+            <td>{{{} | boolean}}, {{[] | boolean}}, {{true | boolean}}, {{1 | boolean}}</td>
+        </tr>
+        <tr>
+            <td>boolean</td>
+            <td>'', false, 0</td>
+            <td>{{'' | boolean}}, {{false | boolean}}, {{0 | boolean}}</td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 <script>
     angular.module('app', ['c2fo.ui']).controller('AppController', AppController);

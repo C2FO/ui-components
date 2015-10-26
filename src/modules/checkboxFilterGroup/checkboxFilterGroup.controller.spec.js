@@ -1,7 +1,7 @@
 "use strict";
 
 describe('Checkbox Filter Group Controller', function () {
-    beforeEach(module('c2fo.ui'));
+    beforeEach(module('c2fo.ui.modules.checkboxFilterGroup'));
 
     var controller,
         scope;

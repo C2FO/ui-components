@@ -73,7 +73,9 @@
 
 	angular.module(moduleName, [
 	    __webpack_require__(3),
-	    __webpack_require__(6)
+	    __webpack_require__(5),
+	    __webpack_require__(7),
+	    __webpack_require__(10)
 	]);
 
 	module.exports = moduleName;
@@ -84,17 +86,78 @@
 
 	"use strict";
 
+	var moduleName = 'c2fo.ui.modules.absoluteValueFilter';
+
+	angular.module(moduleName, [])
+	    .filter('abs', __webpack_require__(4));
+
+	module.exports = moduleName;
+
+
+
+/***/ },
+/* 4 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	module.exports = absoluteValueFilter;
+
+	absoluteValueFilter.$inject = [];
+	function absoluteValueFilter() {
+	    return function (val) {
+	        return Math.abs(val);
+	    };
+	}
+
+/***/ },
+/* 5 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var moduleName = 'c2fo.ui.modules.booleanFilter';
+
+	angular.module(moduleName, [])
+	    .filter('boolean', __webpack_require__(6));
+
+	module.exports = moduleName;
+
+
+
+/***/ },
+/* 6 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	BooleanFilter.$inject = [];
+	function BooleanFilter() {
+	    return function (val) {
+	        return !!val ? 'T' : 'F';
+	    };
+	}
+
+	module.exports = BooleanFilter;
+
+
+/***/ },
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
 	var moduleName = 'c2fo.ui.modules.checkboxFilterGroup';
 
 	angular.module(moduleName, [])
-	    .controller('CheckboxFilterGroupController', __webpack_require__(4))
-	    .directive('c2foCheckboxFilterGroup', __webpack_require__(5));
+	    .controller('CheckboxFilterGroupController', __webpack_require__(8))
+	    .directive('c2foCheckboxFilterGroup', __webpack_require__(9));
 
 	module.exports = moduleName;
 
 
 /***/ },
-/* 4 */
+/* 8 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -144,7 +207,7 @@
 	}
 
 /***/ },
-/* 5 */
+/* 9 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -181,7 +244,7 @@
 	}
 
 /***/ },
-/* 6 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -189,14 +252,14 @@
 	var moduleName = 'c2fo.ui.modules.pager';
 
 	angular.module(moduleName, [])
-	    .controller('PagerController', __webpack_require__(7))
-	    .directive('c2foPager', __webpack_require__(8));
+	    .controller('PagerController', __webpack_require__(11))
+	    .directive('c2foPager', __webpack_require__(12));
 
 	module.exports = moduleName;
 
 
 /***/ },
-/* 7 */
+/* 11 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -234,7 +297,7 @@
 	}
 
 /***/ },
-/* 8 */
+/* 12 */
 /***/ function(module, exports) {
 
 	'use strict';
