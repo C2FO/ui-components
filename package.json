@@ -4,7 +4,8 @@
   "description": "C2FO core ui components",
   "main": "dist/index.js",
   "scripts": {
-    "test": "grunt build"
+    "test": "grunt build",
+    "prepublish": "grunt build"
   },
   "files": [
     "dist/"
