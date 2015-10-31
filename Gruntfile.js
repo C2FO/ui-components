@@ -26,10 +26,7 @@ module.exports = function (grunt) {
                 root: './src',
                 core: '<%= paths.src.root %>/core',
                 modules: '<%= paths.src.root %>/modules'
-            },
-            docs: './docs',
-            ghPages: './gh-pages'
-
+            }
         },
         watch: {
             less: {
